@@ -13,6 +13,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "AP_Baro_MS5611.h"
+#include <GCS_MAVLink/GCS.h>
 
 #include <utility>
 #include <stdio.h>

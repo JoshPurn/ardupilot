@@ -214,6 +214,11 @@ void Plane::set_target_altitude_current(void)
 #endif
 }
 
+void Plane::set_target_depth(void)
+{
+     target_altitude.amsl_cm = g2.depth_hold*100;
+}
+
 /*
   set the target altitude to the current altitude, with ALT_OFFSET adjustment
  */

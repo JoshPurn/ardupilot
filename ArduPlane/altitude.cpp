@@ -216,7 +216,7 @@ void Plane::set_target_altitude_current(void)
 
 void Plane::set_target_depth(void)
 {
-     target_altitude.amsl_cm = g2.depth_hold*100;
+     target_altitude.amsl_cm = g2.depth_hold;
 }
 
 /*

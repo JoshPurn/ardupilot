@@ -10,9 +10,10 @@ bool ModeLoiter::_enter()
 
 void ModeLoiter::update()
 {
-    // Thanks to Yury MonZon for the altitude limit code!
-    plane.calc_nav_roll();
     plane.set_target_depth();
+    plane.nav_roll_cd = 0;
+    plane.calc_nav_pitch();
+
 
 }
 

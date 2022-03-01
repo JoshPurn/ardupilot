@@ -212,9 +212,9 @@ public:
     // methods that affect movement of the vehicle in this mode
     void update() override;
 
-    bool does_auto_navigation() const override { return true; }
+    //bool does_auto_navigation() const override { return true; }
 
-    bool does_auto_throttle() const override { return true; }
+    //bool does_auto_throttle() const override { return true; }
 
 protected:
 
@@ -236,13 +236,13 @@ public:
 
     bool isHeadingLinedUp(const Location loiterCenterLoc, const Location targetLoc);
     bool isHeadingLinedUp_cd(const int32_t bearing_cd);
+/*
+    //bool allows_throttle_nudging() const override { return true; }
 
-    bool allows_throttle_nudging() const override { return true; }
+    //bool does_auto_navigation() const override { return true; }
 
-    bool does_auto_navigation() const override { return true; }
-
-    bool does_auto_throttle() const override { return true; }
-
+    //bool does_auto_throttle() const override { return true; }
+*/
 protected:
 
     bool _enter() override;

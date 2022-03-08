@@ -195,7 +195,7 @@ void Plane::set_target_altitude_current(void)
     // record altitude above sea level at the current time as our
     // target altitude
     target_altitude.amsl_cm = current_loc.alt;
-
+    
     // reset any glide slope offset
     reset_offset_altitude();
 
@@ -216,7 +216,8 @@ void Plane::set_target_altitude_current(void)
 
 void Plane::set_target_depth(void)
 {
-     target_altitude.amsl_cm = g2.depth_hold;
+     target_altitude.amsl_cm = g2.depth_hold*100;
+     plane.next_WP_loc.alt = g2.depth_hold*100;
 }
 
 /*

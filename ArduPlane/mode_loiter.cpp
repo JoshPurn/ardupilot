@@ -3,7 +3,7 @@
 
 bool ModeLoiter::_enter()
 {
- plane.set_target_depth();
+    plane.set_target_depth();
 
     return true;
 }
@@ -79,3 +79,10 @@ void ModeLoiter::navigate()
     //plane.update_loiter(0);
 }
 
+
+bool ModeLoiter::update_target_altitude()
+{
+    //custom function to ensure target altitude is used.
+    plane.set_target_depth();
+    return true;
+}

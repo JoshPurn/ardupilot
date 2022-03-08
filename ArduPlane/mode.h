@@ -236,6 +236,8 @@ public:
 
     bool isHeadingLinedUp(const Location loiterCenterLoc, const Location targetLoc);
     bool isHeadingLinedUp_cd(const int32_t bearing_cd);
+
+    bool update_target_altitude() override;
 /*
     //bool allows_throttle_nudging() const override { return true; }
 

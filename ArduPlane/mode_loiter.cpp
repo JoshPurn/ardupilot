@@ -10,9 +10,8 @@ bool ModeLoiter::_enter()
 
 void ModeLoiter::update()
 {
-    plane.set_target_depth();
     plane.nav_roll_cd = 0;
-    plane.calc_nav_pitch();
+    plane.set_target_depth();
 
 
 }

@@ -3,21 +3,28 @@
 
 bool ModeCircle::_enter()
 {
-    // the altitude to circle at is taken from the current altitude
-    plane.next_WP_loc.alt = plane.current_loc.alt;
+    plane.circle.profile_position = 0;
+    plane.circle.time_max_ms = 15000;
+    plane.circle.reached_target_alt = 0;
+    plane.target_altitude.amsl_cm = 100*plane.g2.profile_top;
+    plane.set_profile_target();
+    gcs().send_text(MAV_SEVERITY_INFO, "Entering Depth Profile Mode");
 
     return true;
 }
 
 void ModeCircle::update()
 {
-    // we have no GPS installed and have lost radio contact
-    // or we just want to fly around in a gentle circle w/o GPS,
-    // holding altitude at the altitude we set when we
-    // switched into the mode
-    plane.nav_roll_cd  = plane.roll_limit_cd / 3;
-    plane.update_load_factor();
+
+    plane.nav_roll_cd = 0;
+    plane.set_profile_target();
+    plane.altitude_error_cm = plane.calc_altitude_error_cm();
     plane.calc_nav_pitch();
-    plane.calc_throttle();
 }
 
+bool ModeCircle::update_target_altitude()
+{
+    //custom function to ensure target altitude is used.
+    plane.set_profile_target();
+    return true;
+}

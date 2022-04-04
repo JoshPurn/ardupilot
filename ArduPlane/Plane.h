@@ -714,6 +714,18 @@ private:
     // The location of the active waypoint in Guided mode.
     struct Location guided_WP_loc {};
 
+    struct {
+        // variable to indicate starting of the profile
+        bool profile_position; //0=top 1=bottom
+        // when loitering and an altitude is involved, this flag is true when it has been reached at least once
+        bool reached_target_alt;
+        // start time of the loiter.  Milliseconds.
+        uint32_t start_time_ms;
+        // The amount of time we should stay in a loiter for the Loiter Time command.  Milliseconds.
+        uint32_t time_max_ms;
+    } circle;
+
+
     // Altitude control
     struct {
         // target altitude above sea level in cm. Used for barometric
@@ -824,6 +836,7 @@ private:
     float relative_ground_altitude(bool use_rangefinder_if_available);
     void set_target_altitude_current(void);
     void set_target_depth(void);
+    void set_profile_target(void);
     void set_target_altitude_current_adjusted(void);
     void set_target_altitude_location(const Location &loc);
     int32_t relative_target_altitude_cm(void);

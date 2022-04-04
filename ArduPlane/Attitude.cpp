@@ -638,7 +638,11 @@ void Plane::calc_nav_pitch()
     int32_t commanded_pitch = SpdHgt_Controller->get_pitch_demand();
     
     if(control_mode == &mode_loiter||control_mode == &mode_circle) {
-        commanded_pitch = altitude_error_cm * 10 * g2.usr_ptch_rate;
+        if(g2.usr_ptch_override != 0) {
+            commanded_pitch = g2.usr_ptch_cmd * 100;
+        } else {
+            commanded_pitch = altitude_error_cm * 10 * g2.usr_ptch_rate;
+        }
     }
 
     // Received an external msg that guides roll in the last 3 seconds?

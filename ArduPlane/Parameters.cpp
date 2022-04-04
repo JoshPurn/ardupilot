@@ -1290,7 +1290,21 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     // @Increment: 0.1 
     AP_GROUPINFO("USER_PITCH_RATE", 36, ParametersG2, usr_ptch_rate, 1.0f),
 
+    // @Param: USER_PITCH_OVERRIDE
+    // @DisplayName: Toggles pitch command mode
+    // @Description: 1 = constant pitch, 0 = auto modes
+    // @User: Advanced
+    // @Range: 0 1
+    // @Increment: 1 
+    AP_GROUPINFO("USER_PITCH_OVERRIDE", 37, ParametersG2, usr_ptch_override, 0),
 
+    // @Param: USER_PITCH_COMMAND
+    // @DisplayName: Pitch command in override mode
+    // @Description: changed to allow a constant pitch and force for test modes
+    // @User: Advanced
+    // @Range: -25 25
+    // @Increment: 0.1 
+    AP_GROUPINFO("USER_PITCH_COMMAND", 36, ParametersG2, usr_ptch_cmd, -1.0f),
 
     AP_GROUPEND
 };

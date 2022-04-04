@@ -585,10 +585,12 @@ public:
     
     
     // MY PARAMETERS /////////////////////////////////
-    AP_Float depth_hold;
-    AP_Float profile_top;
-    AP_Float profile_bottom;
-    AP_Float usr_ptch_rate;
+    AP_Float    depth_hold;
+    AP_Float    profile_top;
+    AP_Float    profile_bottom;
+    AP_Float    usr_ptch_rate;
+    AP_Int8     usr_ptch_override;
+    AP_Float    usr_ptch_cmd;
     ///////////////////
 };
 

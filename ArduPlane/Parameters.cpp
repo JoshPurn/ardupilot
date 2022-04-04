@@ -1290,22 +1290,37 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     // @Increment: 0.1 
     AP_GROUPINFO("USER_PITCH_RATE", 36, ParametersG2, usr_ptch_rate, 1.0f),
 
-    // @Param: USER_PITCH_OVERRIDE
+    // @Param: USER_PTCH_OVRDE
     // @DisplayName: Toggles pitch command mode
     // @Description: 1 = constant pitch, 0 = auto modes
     // @User: Advanced
     // @Range: 0 1
     // @Increment: 1 
-    AP_GROUPINFO("USER_PITCH_OVERRIDE", 37, ParametersG2, usr_ptch_override, 0),
+    AP_GROUPINFO("USER_PTCH_OVRDE", 37, ParametersG2, usr_ptch_override, 0),
 
-    // @Param: USER_PITCH_COMMAND
+    // @Param: USER_PITCH_CMD
     // @DisplayName: Pitch command in override mode
     // @Description: changed to allow a constant pitch and force for test modes
     // @User: Advanced
     // @Range: -25 25
     // @Increment: 0.1 
-    AP_GROUPINFO("USER_PITCH_COMMAND", 36, ParametersG2, usr_ptch_cmd, -1.0f),
+    AP_GROUPINFO("USER_PITCH_CMD", 38, ParametersG2, usr_ptch_cmd, -1.0f),
 
+    // @Param: USER_CLMB_RATE
+    // @DisplayName: Target clmb rate in cruise mode
+    // @Description: speed control for depth system
+    // @User: Advanced
+    // @Range: 0 2
+    // @Increment: 0.01 
+    AP_GROUPINFO("USER_CLMB_RATE", 39, ParametersG2, usr_clmb_rate, 0.2f),
+    
+    // @Param: USER_SPEED_GAIN
+    // @DisplayName: Proportional Gain for clmb rate control
+    // @Description: adjustable gain for sawtooth profilfe
+    // @User: Advanced
+    // @Range: 0 15
+    // @Increment: 0.1 
+    AP_GROUPINFO("USER_SPEED_GAIN", 40, ParametersG2, usr_spd_gain, 1.0f),
     AP_GROUPEND
 };
 

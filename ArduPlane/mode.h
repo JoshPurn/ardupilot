@@ -388,23 +388,19 @@ public:
     bool allows_terrain_disable() const override { return true; }
 
     bool does_automatic_thermal_switch() const override { return true; }
-
+    
     // methods that affect movement of the vehicle in this mode
     void update() override;
 
-    void navigate() override;
+    bool update_target_altitude() override;
 
-    bool get_target_heading_cd(int32_t &target_heading) const;
+    bool does_auto_navigation() const override { return true; }
 
     bool does_auto_throttle() const override { return true; }
 
 protected:
 
     bool _enter() override;
-
-    bool locked_heading;
-    int32_t locked_heading_cd;
-    uint32_t lock_timer_ms;
 };
 
 #if HAL_ADSB_ENABLED

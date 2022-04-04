@@ -725,6 +725,10 @@ private:
         uint32_t time_max_ms;
     } circle;
 
+    struct {
+        // variable to indicate starting of the profile
+        bool profile_position; //0=top 1=bottom
+    } cruise;
 
     // Altitude control
     struct {

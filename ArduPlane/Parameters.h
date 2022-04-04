@@ -357,6 +357,10 @@ public:
         k_param_profile_top,
         k_param_profile_bottom,
         k_param_usr_ptch_rate,
+        k_param_usr_ptch_override,
+        k_param_usr_ptch_cmd,
+        k_param_usr_clmb_rate,
+        k_param_usr_spd_gain,
     };
 
     AP_Int16 format_version;
@@ -591,6 +595,8 @@ public:
     AP_Float    usr_ptch_rate;
     AP_Int8     usr_ptch_override;
     AP_Float    usr_ptch_cmd;
+    AP_Float    usr_clmb_rate;
+    AP_Float    usr_spd_gain;
     ///////////////////
 };
 

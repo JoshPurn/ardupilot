@@ -223,28 +223,44 @@ void Plane::set_target_depth(void)
 void Plane::set_profile_target(void)
 {
     
+    if(control_mode == &mode_circle) {
+        if (circle.reached_target_alt == 0){
+            if (abs(calc_altitude_error_cm()) < 15){
+                circle.reached_target_alt = 1;
+                //set start time
+                circle.start_time_ms = millis();
+            }
+        }
 
-    if (circle.reached_target_alt == 0){
-        if (abs(calc_altitude_error_cm()) < 15){
-            circle.reached_target_alt = 1;
-            //set start time
-            circle.start_time_ms = millis();
+        if (circle.reached_target_alt == 1){
+            //compare start time and wait 10 seconds
+            if(millis() - circle.start_time_ms >= 15000){
+                if(circle.profile_position == 0){
+                    target_altitude.amsl_cm = 100*g2.profile_bottom;
+                    circle.profile_position = 1;
+                    circle.reached_target_alt = 0;
+                    gcs().send_text(MAV_SEVERITY_INFO, "Profile Bottom Target: %f", (double)g2.profile_bottom);
+                }
+                else {
+                    target_altitude.amsl_cm = 100*g2.profile_top;
+                    circle.profile_position = 0;
+                    circle.reached_target_alt = 0;
+                    gcs().send_text(MAV_SEVERITY_INFO, "Profile Top Target: %f", (double)g2.profile_top);
+                }
+            }
         }
     }
 
-    if (circle.reached_target_alt == 1){
-        //compare start time and wait 10 seconds
-        if(millis() - circle.start_time_ms >= 15000){
-            if(circle.profile_position == 0){
+    if(control_mode == &mode_cruise){
+        if (abs(calc_altitude_error_cm()) < 0.5){
+            if(cruise.profile_position == 0){
                 target_altitude.amsl_cm = 100*g2.profile_bottom;
-                circle.profile_position = 1;
-                circle.reached_target_alt = 0;
+                cruise.profile_position = 1;
                 gcs().send_text(MAV_SEVERITY_INFO, "Profile Bottom Target: %f", (double)g2.profile_bottom);
             }
             else {
                 target_altitude.amsl_cm = 100*g2.profile_top;
-                circle.profile_position = 0;
-                circle.reached_target_alt = 0;
+                cruise.profile_position = 0;
                 gcs().send_text(MAV_SEVERITY_INFO, "Profile Top Target: %f", (double)g2.profile_top);
             }
         }

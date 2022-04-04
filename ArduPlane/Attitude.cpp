@@ -645,6 +645,14 @@ void Plane::calc_nav_pitch()
         }
     }
 
+    if(control_mode == &mode_cruise){
+        float clmb_error =  g2.usr_clmb_rate - abs(barometer.get_climb_rate());
+        commanded_pitch = asinf(g2.usr_clmb_rate/g2.usr_spd_gain)+clmb_error*10;
+        if(altitude_error_cm<0){
+            commanded_pitch = -commanded_pitch; 
+        }
+    }
+
     // Received an external msg that guides roll in the last 3 seconds?
     if (control_mode->is_guided_mode() &&
             plane.guided_state.last_forced_rpy_ms.y > 0 &&

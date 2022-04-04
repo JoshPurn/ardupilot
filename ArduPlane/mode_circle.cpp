@@ -8,14 +8,13 @@ bool ModeCircle::_enter()
     plane.circle.reached_target_alt = 0;
     plane.target_altitude.amsl_cm = 100*plane.g2.profile_top;
     plane.set_profile_target();
-    gcs().send_text(MAV_SEVERITY_INFO, "Entering Depth Profile Mode");
+    gcs().send_text(MAV_SEVERITY_INFO, "Entering Depth Position Control Mode");
 
     return true;
 }
 
 void ModeCircle::update()
 {
-
     plane.nav_roll_cd = 0;
     plane.set_profile_target();
     plane.altitude_error_cm = plane.calc_altitude_error_cm();

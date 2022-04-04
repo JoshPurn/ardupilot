@@ -27,8 +27,7 @@ void Plane::adjust_altitude_target()
 {
     Location target_location;
 
-    if (control_mode == &mode_fbwb ||
-        control_mode == &mode_cruise) {
+    if (control_mode == &mode_fbwb) {
         return;
     }
 #if OFFBOARD_GUIDED == ENABLED
@@ -52,7 +51,7 @@ void Plane::adjust_altitude_target()
         set_target_altitude_location(temp);
     } else 
 #endif // OFFBOARD_GUIDED == ENABLED
-      if (control_mode->update_target_altitude()) {
+    if (control_mode->update_target_altitude()) {
           // handled in mode specific code
     } else if (landing.is_flaring()) {
         // during a landing flare, use TECS_LAND_SINK as a target sink
@@ -195,7 +194,7 @@ void Plane::set_target_altitude_current(void)
     // record altitude above sea level at the current time as our
     // target altitude
     target_altitude.amsl_cm = current_loc.alt;
-
+    
     // reset any glide slope offset
     reset_offset_altitude();
 
@@ -212,6 +211,45 @@ void Plane::set_target_altitude_current(void)
         target_altitude.terrain_following = false;        
     }
 #endif
+}
+
+void Plane::set_target_depth(void)
+{
+    target_altitude.amsl_cm = g2.depth_hold*100;
+    altitude_error_cm = calc_altitude_error_cm();
+    calc_nav_pitch();
+}
+
+void Plane::set_profile_target(void)
+{
+    
+
+    if (circle.reached_target_alt == 0){
+        if (abs(calc_altitude_error_cm()) < 15){
+            circle.reached_target_alt = 1;
+            //set start time
+            circle.start_time_ms = millis();
+        }
+    }
+
+    if (circle.reached_target_alt == 1){
+        //compare start time and wait 10 seconds
+        if(millis() - circle.start_time_ms >= 15000){
+            if(circle.profile_position == 0){
+                target_altitude.amsl_cm = 100*g2.profile_bottom;
+                circle.profile_position = 1;
+                circle.reached_target_alt = 0;
+                gcs().send_text(MAV_SEVERITY_INFO, "Profile Bottom Target: %f", (double)g2.profile_bottom);
+            }
+            else {
+                target_altitude.amsl_cm = 100*g2.profile_top;
+                circle.profile_position = 0;
+                circle.reached_target_alt = 0;
+                gcs().send_text(MAV_SEVERITY_INFO, "Profile Top Target: %f", (double)g2.profile_top);
+            }
+        }
+    }
+    
 }
 
 /*

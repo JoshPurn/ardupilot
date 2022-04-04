@@ -351,6 +351,12 @@ public:
         k_param_gcs5,          // stream rates
         k_param_gcs6,          // stream rates
         k_param_fence,         // vehicle fence
+        
+        ////////////// MY PARAMETERS //////////////
+        k_param_depth_hold,
+        k_param_profile_top,
+        k_param_profile_bottom,
+        k_param_usr_ptch_rate,
     };
 
     AP_Int16 format_version;
@@ -476,6 +482,7 @@ public:
     AP_Int8 override_safety;
 #endif
     AP_Int16 gcs_pid_mask;
+    
 };
 
 /*
@@ -575,6 +582,14 @@ public:
     AP_Int8         man_expo_rudder;
 
     AP_Int32        oneshot_mask;
+    
+    
+    // MY PARAMETERS /////////////////////////////////
+    AP_Float depth_hold;
+    AP_Float profile_top;
+    AP_Float profile_bottom;
+    AP_Float usr_ptch_rate;
+    ///////////////////
 };
 
 extern const AP_Param::Info var_info[];

@@ -636,6 +636,10 @@ void Plane::calc_nav_pitch()
     // Calculate the Pitch of the plane
     // --------------------------------
     int32_t commanded_pitch = SpdHgt_Controller->get_pitch_demand();
+    
+    if(control_mode == &mode_loiter||control_mode == &mode_circle) {
+        commanded_pitch = altitude_error_cm * 10 * g2.usr_ptch_rate;
+    }
 
     // Received an external msg that guides roll in the last 3 seconds?
     if (control_mode->is_guided_mode() &&

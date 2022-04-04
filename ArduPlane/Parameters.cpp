@@ -1255,7 +1255,43 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     // @User: Advanced
     // @Bitmask: 0: Servo 1, 1: Servo 2, 2: Servo 3, 3: Servo 4, 4: Servo 5, 5: Servo 6, 6: Servo 7, 7: Servo 8, 8: Servo 9, 9: Servo 10, 10: Servo 11, 11: Servo 12, 12: Servo 13, 13: Servo 14, 14: Servo 15
     AP_GROUPINFO("ONESHOT_MASK", 32, ParametersG2, oneshot_mask, 0),
+
+    // %%%%%%%%%%%%%%%%%%%%%% MY PARAMETERS %%%%%%%%%%%%%%%%%%%%%%%
+
+    // @Param:  DEPTH_HOLD
+    // @DisplayName: depth hold target 
+    // @Description: Target altitude used  for Loiter (constant depth) mode
+    // @User: Advanced
+    // @Range: 0 -15
+    // @Increment: 0.1 
+    AP_GROUPINFO("DEPTH_HOLD", 33, ParametersG2, depth_hold, -1.0f),
+
+    // @Param: PROFILE_TOP
+    // @DisplayName: top depth target for profile mode
+    // @Description: Target Altitude used for Circle (Depth Profile) mode
+    // @User: Advanced
+    // @Range: 0 -15
+    // @Increment: 0.1 
+    AP_GROUPINFO("PROFILE_TOP", 34, ParametersG2, profile_top, -0.5f),
     
+    // @Param: PROFILE_BOTTOM
+    // @DisplayName: bottom depth target for profile mode
+    // @Description: Target Altitude used for Circle (Depth Profile) mode
+    // @User: Advanced
+    // @Range: 0 -15
+    // @Increment: 0.1 
+    AP_GROUPINFO("PROFILE_BOTTOM", 35, ParametersG2, profile_bottom, -1.5f),
+
+    // @Param: USER_PITCH_RATE
+    // @DisplayName: multiplier on altitude error
+    // @Description: changed to allow a quick adjustment of proportional
+    // @User: Advanced
+    // @Range: -15 15
+    // @Increment: 0.1 
+    AP_GROUPINFO("USER_PITCH_RATE", 36, ParametersG2, usr_ptch_rate, 1.0f),
+
+
+
     AP_GROUPEND
 };
 
